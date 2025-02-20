@@ -184,17 +184,19 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "home" / "static",
-    BASE_DIR / "yaja" / "static",
-    BASE_DIR / "login" / "static",
-    BASE_DIR / "seminar" / "static",
-    BASE_DIR / "club" / "static",
+    directory for directory in [
+        BASE_DIR / "static",
+        BASE_DIR / "home" / "static",
+        BASE_DIR / "yaja" / "static",
+        BASE_DIR / "login" / "static",
+        BASE_DIR / "seminar" / "static",
+        BASE_DIR / "club" / "static",
+    ]  if directory.exists()
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
