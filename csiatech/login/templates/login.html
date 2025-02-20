@@ -1,112 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>CSIATech</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSIATech - Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .bg-gradient-primary {
-            background-color: #147cdc;
-            background-image: linear-gradient(180deg, #147cdc 10%, #147cdc 100%);
-            background-size: cover;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "IBM Plex Sans KR", sans-serif;
+        }
+
+        :root {
+            --primary: #4e73df;
+            --primary-dark: #2e59d9;
+            --secondary: #858796;
+            --success: #1cc88a;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+
+        body {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 1rem;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            position: relative;
             overflow: hidden;
         }
 
-        .modal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
+        .login-container::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .card {
-            max-width: 800px;
             width: 100%;
-            margin: 20px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
         }
 
-        .form-control-user {
-            padding: 1.25rem;
-            font-size: 1.1rem;
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .btn-user {
-            padding: 0.75rem 1rem;
-            font-size: 1.1rem;
+        .login-header h1 {
+            font-size: 1.75rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #edf2f7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer span {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-control {
+                padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+            }
         }
     </style>
-
 </head>
-
-<body class="bg-gradient-primary">
-
-    <div class="modal">
-        <div class="card o-hidden border-0 shadow-lg">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">CSIATech LOGIN</h1>
-                            </div>
-                            <form class="user" action="/" method="post" id="loginForm">
-                                <div class="form-group">
-                                    <input type="text" name="student_id" class="form-control form-control-user"
-                                        aria-describedby="emailHelp" placeholder="School ID">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-user"
-                                        placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" class="form-control btn btn-primary" value="Submit" name="submit">
-                                </div>
-                            </form>
-                            <div class="copyright text-center my-auto">
-                                <a href="https://docs.google.com/document/d/1dNDRTqAib8qeAcgwqmXmjzRaaB_hCsY9AH0RJyo-f14/edit?usp=sharing">개인정보처리 방침</a>
-                                <span>Copyright &copy; CSIATech 2024</span>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>CSIATech LOGIN</h1>
+        </div>
+        <form class="user" action="/" method="post" id="loginForm">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" 
+                       name="student_id" 
+                       class="form-control" 
+                       placeholder="School ID" 
+                       aria-describedby="emailHelp">
             </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" 
+                       name="password" 
+                       class="form-control" 
+                       placeholder="Password">
+            </div>
+            <input type="submit" 
+                   class="submit-btn" 
+                   value="로그인" 
+                   name="submit">
+        </form>
+        <div class="footer">
+            <a href="https://docs.google.com/document/d/1dNDRTqAib8qeAcgwqmXmjzRaaB_hCsY9AH0RJyo-f14/edit?usp=sharing">
+                개인정보처리 방침
+            </a>
+            <span>Copyright © CSIATech 2024</span>
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
-    <!-- Custom scripts for all pages-->
+    <!-- Required scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/sb-admin-2.min.js"></script>
     <script src="../static/login.js"></script>
-
 </body>
-
 </html>

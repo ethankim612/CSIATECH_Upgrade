@@ -7,4 +7,4 @@ def club_view(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect("https://csiatech.kr/")
 
-    return render(request, "club.html")
+    return render({request, "club.html"},{"student_id": request.user.student_id})

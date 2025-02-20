@@ -355,13 +355,11 @@
     <nav class="sidebar" id="sidebar">
         <h2>In School</h2>
         <ul>
-            <li><a href="#"><i class="fas fa-moon"></i>야자</a></li>
-            <li><a href="#"><i class="fas fa-users"></i>세미나실</a></li>
-            <li><a href="#"><i class="fas fa-laptop-code"></i>동아리</a></li>
+            <li><a class="nav-link" value = "yaja"><i class="fas fa-moon"></i>야자</a></li>
+            <li><a class="nav-link" value = "seminar"><i class="fas fa-users"></i>세미나실</a></li>
+            <li><a class="nav-link" value = "club"><i class="fas fa-laptop-code"></i>동아리</a></li>
         </ul>
         <ul style="margin-top: 2rem;">
-            <li><a href="#"><i class="fas fa-bullhorn"></i>공지</a></li>
-            <li><a href="#"><i class="fas fa-question-circle"></i>문의</a></li>
         </ul>
     </nav>
 
@@ -430,6 +428,7 @@
     </main>
 
     <script>
+        
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');

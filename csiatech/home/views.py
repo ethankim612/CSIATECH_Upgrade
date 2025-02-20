@@ -7,4 +7,4 @@ def home_view(request):
         return HttpResponseRedirect("https://csiatech.kr/")
     # Your logic to aggregate data or render templates goes here
     print(request.user.student_id)
-    return render(request, "home.html")
+    return render({request, "home.html"},{"student_id": request.user.student_id})

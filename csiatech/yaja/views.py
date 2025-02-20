@@ -120,4 +120,4 @@ def yaja_view(request):
 
             return Response(response_data)
 
-    return render(request, "yaja.html", {"Yaja": schedule})
+    return render(request, "yaja.html", {"Yaja": schedule}, {"student_id": request.user.student_id})
