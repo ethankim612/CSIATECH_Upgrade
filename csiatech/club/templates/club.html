@@ -54,7 +54,7 @@
         }
 
         .menu-button {
-            display: none;
+            display: block;
             background: none;
             border: none;
             color: white;
@@ -90,6 +90,7 @@
             padding: 2rem 0;
             grid-row: 2;
             color: white;
+            transition: left 0.3s ease;
         }
 
 
@@ -289,7 +290,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 98;
+            z-index: 999;
         }
 
         .overlay.active {
@@ -307,10 +308,6 @@
                 width: 220px;
             }
 
-            .main-container {
-                margin-left: 220px;
-                padding: 80px 2rem 2rem 2rem;
-            }
 
             .page-header {
                 display: flex;
@@ -338,7 +335,7 @@
         }
 
         /* Small screens */
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.2rem;
             }
@@ -355,6 +352,22 @@
             .club-title {
                 font-size: 1.1rem;
             }
+
+            .sidebar {
+                position: fixed;
+                left: -220px;
+                top: 0;
+                bottom: 0;
+                width: 220px;
+                z-index: 1000;
+                padding-top: 60px;
+            }
+        
+            /* 사이드바 활성화 시 화면에 표시 */
+            .sidebar.active {
+                left: 0;
+            }
+
         }
     </style>
 </head>
@@ -510,21 +523,22 @@
             });
         });
 
+        // 사이드바 및 오버레이 동작
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
 
         menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            sidebar.classList.toggle('active');  // 사이드바 활성화
+            overlay.classList.toggle('active');  // 오버레이 활성화
         });
 
         overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
+            sidebar.classList.remove('active'); // 사이드바 비활성화
+            overlay.classList.remove('active'); // 오버레이 비활성화
         });
 
-        // Close sidebar when clicking outside
+        // 바깥 영역 클릭 시 사이드바 닫기
         document.addEventListener('click', (e) => {
             if (!sidebar.contains(e.target) && 
                 !menuToggle.contains(e.target) && 

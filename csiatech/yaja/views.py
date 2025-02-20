@@ -122,5 +122,5 @@ def yaja_view(request):
 
     context = {"Yaja": schedule}  # 기존 context
     context["student_id"] = request.user.student_id  # student_id 추가
-
+    
     return render(request, "yaja.html", context)

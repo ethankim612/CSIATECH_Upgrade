@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 document
-  .getElementById("weekForm")
+  .getElementById("yajasubmit")
   .addEventListener("submit", function (event) {
     console.log("clickeeed the submit for today button");
     event.preventDefault();
