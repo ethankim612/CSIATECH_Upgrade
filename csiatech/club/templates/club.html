@@ -90,7 +90,6 @@
             padding: 2rem 0;
             grid-row: 2;
             color: white;
-            transition: left 0.3s ease;
         }
 
 
@@ -128,7 +127,10 @@
         }
 
         .main-container {
-            padding: 2rem;
+            width: 100%;
+            max-width: 600px;  /* 모바일 화면에서 컨텐츠 폭 제한 */
+            margin: 0 auto;  /* 가운데 정렬 */
+            padding: 2rem 1rem;  /* 좌우 패딩 추가 */
             background-color: var(--light);
         }
 
