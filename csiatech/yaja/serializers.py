@@ -4,10 +4,6 @@ from .models import (
     Tuesday,
     Wednesday,
     Thursday,
-    DefaultMonday,
-    DefaultTuesday,
-    DefaultWednesday,
-    DefaultThursday,
 )
 
 
