@@ -35,38 +35,31 @@
         }
 
         .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
+            grid-column: 1 / -1;
             background: var(--primary-dark);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
             z-index: 100;
+            height: 60px;
         }
 
         .header h1 {
             font-size: 23px;
             margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
         .menu-button {
+            display: none;
             background: none;
             border: none;
             color: white;
             font-size: 24px;
             cursor: pointer;
             padding: 8px;
-            display: flex;
-            align-items: center;
         }
 
         .student-info {
@@ -76,8 +69,10 @@
             padding: 0.5rem 1rem;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 2rem;
+            margin-right: 1rem;
             font-size: 1rem;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         
         .student-info i {
@@ -85,18 +80,15 @@
             opacity: 0.9;
         }
 
+        .student-info:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .sidebar {
-            position: fixed;
-            top: 60px;
-            left: -260px;
-            width: 260px;
-            height: calc(100vh - 60px);
             background: var(--primary-dark);
+            padding: 2rem 0;
+            grid-row: 2;
             color: white;
-            padding: 1.5rem;
-            transition: left 0.3s ease;
-            z-index: 99;
-            overflow-y: auto;
         }
 
         .sidebar.active {
@@ -104,14 +96,14 @@
         }
 
         .sidebar h2 {
-            font-size: 20px;
-            margin-bottom: 1.5rem;
+            font-size: 23px;
             color: white;
+            margin: 0 1.5rem 1.5rem;
         }
 
         .sidebar ul {
             list-style: none;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.1rem;
         }
 
         .sidebar li {
@@ -133,6 +125,7 @@
         .sidebar a:hover {
             background: rgba(255, 255, 255, 0.1);
             color: white;
+            transform: translateX(5px);
         }
 
         .main-container {

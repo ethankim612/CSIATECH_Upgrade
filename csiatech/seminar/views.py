@@ -163,6 +163,7 @@ def seminar_room_view(request):
     # Retrieve the reservation details for the logged-in student
 
 
+    context = {}
+    context["student_id"] = request.user.student_id  # student_id 추가
 
-
-    return render(request, "seminar.html",{"student_id": request.user.student_id})
+    return render(request, "seminar.html", context)
