@@ -181,6 +181,7 @@
         .table-container {
             overflow-x: auto;
             margin-bottom: 1rem;
+            position: relative;
         }
 
         .today-schedule,
@@ -194,13 +195,15 @@
         .today-schedule td,
         .week-schedule th,
         .week-schedule td {
-            padding: 1rem;
-            text-align: left;
+            padding: 0.5rem;
+            text-align: center;
+            vertical-align: middle;
             border-bottom: 1px solid #edf2f7;
         }
 
         .week-schedule {
             min-width: 500px;
+            table-layout: fixed;
         }
 
         .schedule-select {
@@ -289,7 +292,7 @@
             display: block;
         }
 
-        /* 데스크탑 뷰 (768px 이상) */
+        /* 반응형 스타일 수정 */
         @media (min-width: 768px) {
             .menu-button {
                 display: none;
@@ -309,22 +312,40 @@
                 grid-template-columns: 1fr 1.5fr;
             }
 
+            .table-container {
+                overflow-x: visible;
+            }
+
             .week-schedule {
+                min-width: auto;
                 width: 100%;
-                table-layout: fixed;
             }
 
             .week-schedule th,
             .week-schedule td {
-                width: 20%; /* 5개 열(교시 + 월화수목)을 균등하게 배분 */
-            }
-
-            .table-container {
-                overflow-x: visible;
+                font-size: 1rem;
             }
         }
 
-        /* 모바일 뷰 (768px 미만) */
+        /* 테이블 반응형 개선 */
+        @media (min-width: 500px) and (max-width: 991px) {
+            .week-schedule {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .week-schedule th,
+            .week-schedule td {
+                font-size: calc(8px + 0.5vw);
+                padding: 0.5rem 0.25rem;
+            }
+
+            .schedule-select {
+                font-size: calc(8px + 0.5vw);
+                padding: 0.25rem;
+            }
+        }
+
         @media (max-width: 767px) {
             .header h1 {
                 font-size: 1.2rem;
@@ -353,10 +374,6 @@
             .table-container {
                 max-height: 60vh;
                 overflow-y: auto;
-            }
-
-            .week-schedule {
-                min-width: 500px;
             }
 
             .button-group {
@@ -388,12 +405,10 @@
                 padding: 0.4rem;
             }
 
-            .today-schedule th,
-            .today-schedule td,
             .week-schedule th,
             .week-schedule td {
-                padding: 0.8rem;
-                font-size: 0.9rem;
+                padding: 0.4rem 0.2rem;
+                font-size: 0.8rem;
             }
 
             .help-card {
@@ -450,28 +465,30 @@
                     오늘의 야자
                 </div>
                 <div class="card-body">
-                    <table class="today-schedule">
-                        <thead>
-                            <tr>
-                                <th>교시</th>
-                                <th>현재 선택</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1교시</td>
-                                <td>{{ Yaja.period1 }}</td>
-                            </tr>
-                            <tr>
-                                <td>2교시</td>
-                                <td>{{ Yaja.period2 }}</td>
-                            </tr>
-                            <tr>
-                                <td>3교시</td>
-                                <td>{{ Yaja.period3 }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-container">
+                        <table class="today-schedule">
+                            <thead>
+                                <tr>
+                                    <th>교시</th>
+                                    <th>현재 선택</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1교시</td>
+                                    <td>{{ Yaja.period1 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>2교시</td>
+                                    <td>{{ Yaja.period2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>3교시</td>
+                                    <td>{{ Yaja.period3 }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <a href="https://forms.gle/gCQwUdWHCPL28CsN8" class="report-link">
                         <i class="fas fa-exclamation-circle"></i>
@@ -489,7 +506,6 @@
                 <div class="card-body">
                     <div class="table-container">
                         <table class="week-schedule">
-                            <!-- 주간 스케줄 테이블 내용 -->
                             <thead>
                                 <tr>
                                     <th>교시</th>
