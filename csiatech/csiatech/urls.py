@@ -24,4 +24,5 @@ urlpatterns = [
     # Add other app paths as needed
     path("", include("yaja.urls")),
     path("", include("club.urls")),
+    path("", include("seminar.urls")),
 ]

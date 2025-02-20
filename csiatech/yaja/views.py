@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.db import transaction
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -120,4 +119,8 @@ def yaja_view(request):
 
             return Response(response_data)
 
-    return render(request, "yaja.html", {"Yaja": schedule}, {"student_id": request.user.student_id})
+
+    context = {"Yaja": schedule}  # 기존 context
+    context["student_id"] = request.user.student_id  # student_id 추가
+
+    return render(request, "yaja.html", context)
