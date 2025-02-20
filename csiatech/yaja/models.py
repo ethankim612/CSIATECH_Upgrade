@@ -35,3 +35,35 @@ class Thursday(models.Model):
     student_id = models.CharField(max_length=10, null=True, blank=True)
     history = HistoricalRecords()
 
+
+# Default schedules for users
+class DefaultMonday(models.Model):
+    student_id = models.CharField(max_length=10, null=True, blank=True)
+    period1 = models.CharField(max_length=50)
+    period2 = models.CharField(max_length=50)
+    period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
+
+
+class DefaultTuesday(models.Model):
+    student_id = models.CharField(max_length=10, null=True, blank=True)
+    period1 = models.CharField(max_length=50)
+    period2 = models.CharField(max_length=50)
+    period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
+
+
+class DefaultWednesday(models.Model):
+    student_id = models.CharField(max_length=10, null=True, blank=True)
+    period1 = models.CharField(max_length=50)
+    period2 = models.CharField(max_length=50)
+    period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
+
+
+class DefaultThursday(models.Model):
+    student_id = models.CharField(max_length=10, null=True, blank=True)
+    period1 = models.CharField(max_length=50)
+    period2 = models.CharField(max_length=50)
+    period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()

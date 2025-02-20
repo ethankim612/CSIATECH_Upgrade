@@ -34,3 +34,26 @@ class ThursdaySerializer(serializers.ModelSerializer):
         model = Thursday
         fields = ["period1", "period2", "period3", "student_id"]
 
+
+class DefaultMondaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DefaultMonday
+        fields = ["period1", "period2", "period3", "student_id"]
+
+
+class DefaultTuesdaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DefaultTuesday
+        fields = ["period1", "period2", "period3", "student_id"]
+
+
+class DefaultWednesdaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DefaultWednesday
+        fields = ["period1", "period2", "period3", "student_id"]
+
+
+class DefaultThursdaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DefaultThursday
+        fields = ["period1", "period2", "period3", "student_id"]
