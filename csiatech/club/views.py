@@ -9,4 +9,4 @@ def club_view(request):
 
     context = {}
     context["student_id"] = request.user.student_id
-    return render(request, "club.html")
+    return render(request, "club.html", context)
