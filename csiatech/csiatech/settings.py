@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "home",
     "login",
-    "counsel",
     "yaja",
     "django_celery_results",
     "django_celery_beat",
