@@ -188,12 +188,13 @@ STATICFILES_DIRS = [
     BASE_DIR / "home" / "static",
     BASE_DIR / "yaja" / "static",
     BASE_DIR / "login" / "static",
+    BASE_DIR / "seminar" / "static",
     BASE_DIR / "club" / "static",
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "/collectedstatic/"
+STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
