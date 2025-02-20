@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "django_celery_beat",
     "rest_framework",
     "corsheaders",
-    "announce",
     "questions",
     "club",
     "seminar",
