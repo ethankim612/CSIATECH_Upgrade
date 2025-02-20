@@ -174,6 +174,13 @@
 
         .card-body {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 1rem;
         }
 
         .today-schedule,
@@ -192,8 +199,8 @@
             border-bottom: 1px solid #edf2f7;
         }
 
-        .week-schedule td {
-            min-width: 180px;
+        .week-schedule {
+            min-width: 500px;
         }
 
         .schedule-select {
@@ -204,6 +211,22 @@
             font-size: 0.9rem;
             color: var(--dark);
             transition: all 0.3s ease;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .button-group {
@@ -266,7 +289,7 @@
             display: block;
         }
 
-        /* Tablet and larger screens */
+        /* 데스크탑 뷰 (768px 이상) */
         @media (min-width: 768px) {
             .menu-button {
                 display: none;
@@ -285,9 +308,23 @@
             .schedule-container {
                 grid-template-columns: 1fr 1.5fr;
             }
+
+            .week-schedule {
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            .week-schedule th,
+            .week-schedule td {
+                width: 20%; /* 5개 열(교시 + 월화수목)을 균등하게 배분 */
+            }
+
+            .table-container {
+                overflow-x: visible;
+            }
         }
 
-        /* Small screens */
+        /* 모바일 뷰 (768px 미만) */
         @media (max-width: 767px) {
             .header h1 {
                 font-size: 1.2rem;
@@ -309,19 +346,30 @@
                 align-items: center;
             }
 
+            .card-body {
+                padding: 1rem;
+            }
+
+            .table-container {
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+
             .week-schedule {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
+                min-width: 500px;
+            }
+
+            .button-group {
+                position: sticky;
+                bottom: 0;
+                background-color: white;
+                padding-top: 1rem;
+                margin-top: auto;
             }
 
             .card-header {
                 padding: 1rem;
                 font-size: 1rem;
-            }
-
-            .card-body {
-                padding: 1rem;
             }
         }
 
@@ -439,7 +487,7 @@
                     이번주 야자
                 </div>
                 <div class="card-body">
-                    <div style="overflow-x: auto;">
+                    <div class="table-container">
                         <table class="week-schedule">
                             <!-- 주간 스케줄 테이블 내용 -->
                             <thead>
@@ -462,7 +510,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period1-Monday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period1-Monday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period1-Tuesday">
@@ -472,7 +520,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period1-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period1-Tuesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period1-Wednesday">
@@ -482,7 +530,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period1-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period1-Wednesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period1-Thursday">
@@ -492,7 +540,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period1-Thursday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period1-Thursday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -505,7 +553,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period2-Monday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period2-Monday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period2-Tuesday">
@@ -515,7 +563,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period2-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period2-Tuesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period2-Wednesday">
@@ -525,7 +573,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period2-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period2-Wednesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period2-Thursday">
@@ -535,7 +583,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period2-Thursday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period2-Thursday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -548,7 +596,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period3-Monday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period3-Monday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period3-Tuesday">
@@ -558,7 +606,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period3-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period3-Tuesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period3-Wednesday">
@@ -568,7 +616,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period3-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period3-Wednesday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                     <td>
                                         <select class="schedule-select period-select" id="period3-Thursday">
@@ -578,7 +626,7 @@
                                             <option value="주문형강좌/방과후">주문형강좌/방과후</option>
                                             <option value="기타">기타</option>
                                         </select>
-                                        <input type="text" id="period3-Thursday-input" style="display: none;" class="form-control mt-2">
+                                        <input type="text" id="period3-Thursday-input" class="schedule-select custom-input" style="display: none;">
                                     </td>
                                 </tr>
                             </tbody>
@@ -609,78 +657,5 @@
     </main>
 
     <script src="../static/yaja.js"></script>
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-
-        // Close sidebar when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!sidebar.contains(e.target) && 
-                !menuToggle.contains(e.target) && 
-                sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-        });
-
-        const apiURL = "https://csiatech.kr/";
-        
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const value = link.getAttribute('value');
-                if (value) {
-                    window.location.href = apiURL + value;
-                }
-            });
-        });
-
-        // Handle mobile table scrolling
-        const tables = document.querySelectorAll('.week-schedule');
-        tables.forEach(table => {
-            let isScrolling = false;
-            let startX;
-            let scrollLeft;
-
-            table.addEventListener('touchstart', (e) => {
-                isScrolling = true;
-                const tableWrapper = table.parentElement;
-                startX = e.touches[0].pageX - tableWrapper.offsetLeft;
-                scrollLeft = tableWrapper.scrollLeft;
-            });
-
-            table.addEventListener('touchmove', (e) => {
-                if (!isScrolling) return;
-                e.preventDefault();
-                const tableWrapper = table.parentElement;
-                const x = e.touches[0].pageX - tableWrapper.offsetLeft;
-                const walk = (x - startX);
-                tableWrapper.scrollLeft = scrollLeft - walk;
-            });
-
-            table.addEventListener('touchend', () => {
-                isScrolling = false;
-            });
-        });
-
-        // Initialize select dropdowns with default values
-        document.addEventListener('DOMContentLoaded', () => {
-            const periodSelects = document.querySelectorAll('.period-select');
-            periodSelects.forEach(select => {
-                select.value = "야자"; // Set default value
-            });
-        });
-    </script>
 </body>
 </html>
