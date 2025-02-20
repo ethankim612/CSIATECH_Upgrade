@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CSIATech</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+        
+    <!-- Custom styles for this template-->
+    <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+
+        /* Base styles */
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #f8f9fc;
+            color: #5a5c69;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #2e59d9;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 23px;
+            color: #ffffff;
+            margin: 20px 0 20px 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #d1d3e2;
+            font-size: 20px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+
+        .sidebar .footer {
+            margin-top: auto;
+            padding: 20px;
+        }
+        .instruction-container {
+            margin-top: 20px;
+            background-color: #F4F8FF;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blue-box {
+            background-color: #4e73df;
+            color: white;
+            padding: 20px;
+            width: 75vw; /* 75% of the viewport width */
+            height: 50px; /* 75% of the viewport height */
+            font-size: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #2e59d9;
+            color: #ffffff;
+            padding: 15px;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            box-sizing: none;
+        }
+
+        .navbar .nav-item {
+            margin-right: 20px;
+        }
+
+        .navbar .nav-link {
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: #4e73df;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .content-wrapper {
+            margin-top: 70px;
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+        }
+
+        .report{
+            font-size: 25px;
+            align-self: center;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #2e59d9;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e59d9;
+        }
+
+        .btn-info {
+            background-color: #36b9cc;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #2c9faf;
+        }
+
+        .btn-submit {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #e55a4f;
+        }
+
+        .table-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table-container {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .form-control-lg {
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            background-clip: padding-box;
+            box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        @media (max-width: 850px) {
+        .sidebar {
+            display: none; /* Hide sidebar on smaller screens */
+        }
+
+        .content-wrapper {
+            margin-left: 0; /* Adjust margin when sidebar is hidden */
+        }
+
+        .table-wrapper {
+            flex-direction: column; /* Stack tables vertically */
+        }
+
+        .table-container {
+            width: 100%; /* Make tables full width */
+            margin: 0; /* Remove margin between tables */
+        }
+    }
+
+    /* Media Query for larger screens */
+    @media (min-width: 851px) {
+        .sidebar {
+            display: flex; /* Show sidebar on larger screens */
+        }
+
+        .content-wrapper {
+            margin-left: 220px; /* Restore margin when sidebar is visible */
+        }
+
+        .table-wrapper {
+            flex-direction: row; /* Align tables horizontally */
+        }
+
+        .table-container {
+            width: 45%; /* Adjust width for horizontal alignment */
+            margin: 10px; /* Add margin between tables */
+        }
+    }
+    .navbar-nav {
+        display: flex; /* Use flexbox for horizontal alignment */
+        align-items: center; /* Center the items vertically */
+        justify-content: flex-end; /* Align the items to the right */
+    }
+
+    .navbar-nav .nav-item {
+        display: inline-flex; /* Display each nav item as inline-flex for proper alignment */
+        margin-left: 15px; /* Add spacing between the items */
+    }
+
+    /* Hide specific nav-items on larger screens */
+    @media (min-width: 850px) {
+        .navbar-nav .nav-item {
+            display: none; /* Hide all nav-items by default on larger screens */
+        }
+        .period-select{
+            font-size: 18px;
+        }
+        .week-period-select{
+            font-size: 18px;
+        }
+    }
+
+    /* Show specific nav-items on smaller screens */
+    @media (max-width: 849px) {
+        .navbar-nav .nav-item {
+            display: inline-flex; 
+            font-size: 18px;/* Ensure nav-items are displayed inline-flex on smaller screens */
+        }
+        .period-select{
+            font-size: 10px;
+        }
+        .week-period-select{
+            font-size: 10px;
+        }
+        select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 0px;
+        text-overflow: '';
+        }
+
+    }
+
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>    </h2>
+        <h2>    </h2>
+
+        <h2>In School</h2>
+        <ul>
+            <li><a class="nav-link" value="yaja">야자</a></li>
+            <li><a class="nav-link"  value="seminar">세미나실</a></li>
+            <li><a class="nav-link" id = "working" value="club">동아리</a></li>
+        </ul>
+        <div class="footer">
+            <ul>
+                <li><a class="nav-link" value="announce">공지</a></li>
+                <li><a class="nav-link" value="questions">문의</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End of Sidebar -->
+
+    <!-- Topbar -->
+        <nav class="navbar">
+        <a class="navbar-brand nav-link" value = "home" href="#">CSIATech</a>
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" value = "home">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a class="nav-link" value = "yaja">
+                    <span>야자</span>
+                </a>
+                <a class="nav-link"  value = "seminar">
+                    <span>세미나실</span>
+                </a>
+                <a class="nav-link" id = "working" value = "club">
+                    <span>동아리(개발중)</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End of Topbar -->
+
+    
+    <div class="content-wrapper">
+        <div class="blue-box">
+            매일 5시 30분 이후 야자 일정 변경은 반영되지 않습니다
+        </div>
+        <div class="table-wrapper">
+            <div class="table-container">
+                <h2 class="text-center">오늘의 야자</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>교시</th>
+                            <th>현재 선택</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1교시</td>
+                            <td>{{ Yaja.period1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>2교시</td>
+                            <td>{{ Yaja.period2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>3교시</td>
+                            <td>{{ Yaja.period3 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="report" href="https://forms.gle/gCQwUdWHCPL28CsN8">야자 오류 신고하기</a>
+                <div class="instruction-container">
+                    <h2>야자 신청은 이렇게 하면 돼요!</h2>
+                    <p><strong>1. 일정 작성하기:</strong> 아래 요일별로 1교시, 2교시, 3교시 칸에 여러분의 일정을 적어주세요.</p>
+                    <p><strong>2. 신청 확인하기:</strong> 오늘의 야자 일정이 제대로 신청되었는지 확인하려면 오늘의 야자 확인을 꼭 해야 해요!</p>
+                    <p><strong>3. 조퇴 안내:</strong> 야자를 신청할 때, 한 교시라도 조퇴하려면 3교시 모두 조퇴로 신청해야 해요. (기숙사에서 학교로 나올 수 없어요.) 하지만, 조퇴 후 외출이나 현체를 한다면 조퇴와 함께 다른 교시에도 신청할 수 있어요.</p>
+                    <p><strong>4. 일괄 신청:</strong> 한 번 일주일 치 일괄 신청을 하면 다음 주에도 그 내용이 유지돼요. 매주 유지되는 스케줄을 신청할 수 있어요!</p>
+                    <p>이제 쉽고 간단하게 야자 신청해보세요!</p>
+                </div>
+
+            </div>
+            <div class="table-container">
+                <form id="weekForm" action="/" method="put">
+                    <h2 class="text-center">이번주 야자</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>교시</th>
+                                <th>월요일</th>
+                                <th>화요일</th>
+                                <th>수요일</th>
+                                <th>목요일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1교시</td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period1-Monday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period1-Monday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period1-Tuesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period1-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period1-Wednesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period1-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period1-Thursday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period1-Thursday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2교시</td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period2-Monday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period2-Monday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period2-Tuesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period2-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period2-Wednesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period2-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period2-Thursday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period2-Thursday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3교시</td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period3-Monday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period3-Monday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period3-Tuesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period3-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period3-Wednesday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period3-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-lg period-select" id="period3-Thursday">
+                                        <option value="야자">야자</option>
+                                        <option value="조퇴">조퇴</option>
+                                        <option value="외출/현체">외출/현체</option>
+                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                    <input type="text" id="period3-Thursday-input" style="display: none;" class="form-control mt-2">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-buttons">
+                        
+                        <input type="submit" class="btn btn-submit" value="Submit" name="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <!-- Weekly Modal -->
+    
+    <!-- End of Weekly Modal -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <a href="https://docs.google.com/document/d/1dNDRTqAib8qeAcgwqmXmjzRaaB_hCsY9AH0RJyo-f14/edit?usp=sharing">개인정보처리 방침</a>
+                <span>Copyright &copy; CSIATech 2024</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../static/js/sb-admin-2.min.js"></script>
+    <script src="../static/yaja.js"></script>
+
+</body>
+
+</html>
