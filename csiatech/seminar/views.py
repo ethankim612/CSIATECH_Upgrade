@@ -165,4 +165,4 @@ def seminar_room_view(request):
 
 
 
-    return render({request, "seminar.html"},{"student_id": request.user.student_id})
+    return render(request, "seminar.html",{"student_id": request.user.student_id})
