@@ -188,7 +188,6 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "counsel" / "static",
     BASE_DIR / "home" / "static",
     BASE_DIR / "yaja" / "static",
     BASE_DIR / "login" / "static",
