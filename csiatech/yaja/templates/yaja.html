@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSIATech - 야자 신청</title>
@@ -29,38 +29,33 @@
         body {
             font-family: "IBM Plex Sans KR", sans-serif;
             background: var(--light);
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            grid-template-rows: 60px 1fr;
             min-height: 100vh;
+            width: 100%;
+            position: relative;
         }
 
         .header {
-            grid-column: 1 / -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
             background: var(--primary-dark);
             color: white;
-            padding: 1rem;
+            padding: 0.5rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
             z-index: 100;
-            height: 60px;
         }
 
         .header h1 {
             font-size: 23px;
             margin: 0;
-        }
-
-        .menu-button {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .student-info {
@@ -70,14 +65,8 @@
             padding: 0.5rem 1rem;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 2rem;
-            margin-right: 1rem;
             font-size: 1rem;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .student-info:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
         
         .student-info i {
@@ -85,37 +74,37 @@
             opacity: 0.9;
         }
 
-        .overlay {
+        .menu-button {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .overlay.active {
-            display: block;
         }
 
         .sidebar {
+            position: fixed;
+            top: 60px;
+            left: -260px;
+            width: 260px;
+            height: calc(100vh - 60px);
             background: var(--primary-dark);
-            padding: 2rem 0;
-            grid-row: 2;
             color: white;
+            padding: 1.5rem;
+            transition: left 0.3s ease;
+            z-index: 99;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
         }
 
         .sidebar h2 {
-            font-size: 23px;
+            font-size: 20px;
+            margin-bottom: 1.5rem;
             color: white;
-            margin: 0 1.5rem 1.5rem;
         }
 
         .sidebar ul {
             list-style: none;
-            margin: 0 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .sidebar li {
@@ -127,7 +116,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem;
             border-radius: 5px;
             transition: all 0.3s ease;
             font-size: 16px;
@@ -137,14 +126,12 @@
         .sidebar a:hover {
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            transform: translateX(5px);
         }
 
         .main-container {
-            grid-column: 2;
-            padding: 2rem;
-            overflow-y: auto;
-            background: #f5f7fa;
+            padding: 80px 1rem 1rem 1rem;
+            min-height: 100vh;
+            background: var(--light);
         }
 
         .alert-banner {
@@ -159,13 +146,9 @@
             box-shadow: var(--shadow);
         }
 
-        .alert-banner i {
-            font-size: 1.5rem;
-        }
-
         .schedule-container {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 1fr;
             gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -193,46 +176,24 @@
             padding: 1.5rem;
         }
 
-        .today-schedule {
-            border-collapse: collapse;
+        .today-schedule,
+        .week-schedule {
             width: 100%;
+            border-collapse: collapse;
             margin-top: 1rem;
         }
 
         .today-schedule th,
-        .today-schedule td {
+        .today-schedule td,
+        .week-schedule th,
+        .week-schedule td {
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid #edf2f7;
         }
 
-        .today-schedule th {
-            background: #f8fafc;
-            font-weight: 500;
-            color: var(--primary-dark);
-        }
-
-        .today-schedule td {
-            color: var(--dark);
-        }
-
-        .week-schedule {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .week-schedule th,
         .week-schedule td {
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid #edf2f7;
-        }
-
-        .week-schedule th {
-            background: #f8fafc;
-            font-weight: 500;
-            color: var(--primary-dark);
+            min-width: 180px;
         }
 
         .schedule-select {
@@ -243,12 +204,6 @@
             font-size: 0.9rem;
             color: var(--dark);
             transition: all 0.3s ease;
-        }
-
-        .schedule-select :focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
         }
 
         .button-group {
@@ -267,24 +222,14 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            width: 100%;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
-            flex: 1;
-        }
-
-        .btn-secondary {
-            background: var(--danger);
-            color: white;
-            flex: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
         }
 
         .help-card {
@@ -293,32 +238,6 @@
             padding: 1.5rem;
             margin-top: 2rem;
             box-shadow: var(--shadow);
-        }
-
-        .help-card h3 {
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .help-card ul {
-            list-style: none;
-        }
-
-        .help-card li {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--dark);
-        }
-
-        .help-card li::before {
-            content: "•";
-            color: var(--primary);
-            position: absolute;
-            left: 0;
         }
 
         .report-link {
@@ -332,27 +251,44 @@
             transition: all 0.3s ease;
         }
 
-        .report-link:hover {
-            color: var(--primary-dark);
-            transform: translateX(5px);
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 98;
         }
 
-        @media (max-width: 768px) {
-            body {
-                grid-template-columns: 1fr;
-                min-height: 100vh;
-                width: 100%;
-                overflow-x: hidden;
-            }
+        .overlay.active {
+            display: block;
+        }
 
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
             .menu-button {
-                display: block;
+                display: none;
             }
 
-            .header {
-                padding: 0.5rem;
+            .sidebar {
+                left: 0;
+                width: 220px;
             }
 
+            .main-container {
+                margin-left: 220px;
+                padding: 80px 2rem 2rem 2rem;
+            }
+
+            .schedule-container {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        /* Small screens */
+        @media (max-width: 767px) {
             .header h1 {
                 font-size: 1.2rem;
             }
@@ -362,52 +298,21 @@
                 padding: 0.4rem 0.8rem;
             }
 
-            .sidebar {
-                position: fixed;
-                left: -220px;
-                top: 0;
-                bottom: 0;
-                width: 220px;
-                transition: left 0.3s ease;
-                z-index: 1000;
-                padding-top: 60px;
+            .menu-button {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 8px;
+                display: flex;
+                align-items: center;
             }
 
-            .sidebar.active {
-                left: 0;
-            }
-
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-            }
-
-            .overlay.active {
+            .week-schedule {
                 display: block;
-            }
-
-            .main-container {
-                grid-column: 1;
-                margin: 0;
-                padding: 1rem;
-                width: 100%;
-            }
-
-            .schedule-container {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                width: 100%;
-            }
-
-            .schedule-card {
-                width: 100%;
-                margin-bottom: 1rem;
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
             .card-header {
@@ -417,55 +322,6 @@
 
             .card-body {
                 padding: 1rem;
-            }
-
-            .alert-banner {
-                padding: 1rem;
-                text-align: center;
-                margin-bottom: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .help-card {
-                margin: 1rem 0;
-                width: 100%;
-            }
-
-            .button-group {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .btn {
-                width: 100%;
-                padding: 0.8rem;
-                font-size: 1rem;
-            }
-
-            .week-schedule {
-                font-size: 0.9rem;
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .week-schedule th,
-            .week-schedule td {
-                padding: 0.8rem;
-                min-width: 120px;
-            }
-
-            .schedule-select{
-                font-size: 0.9rem;
-                padding: 0.4rem;
-                width: 100%;
-                min-width: 120px;
-            }
-
-            .today-schedule th,
-            .today-schedule td {
-                padding: 0.8rem;
             }
         }
 
@@ -479,27 +335,25 @@
                 padding: 0.3rem 0.6rem;
             }
 
-            .main-container {
-                padding: 0.8rem;
+            .schedule-select {
+                font-size: 0.8rem;
+                padding: 0.4rem;
             }
 
-            .card-header {
-                font-size: 0.9rem;
+            .today-schedule th,
+            .today-schedule td,
+            .week-schedule th,
+            .week-schedule td {
                 padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .help-card {
+                padding: 1rem;
             }
 
             .help-card h3 {
                 font-size: 1rem;
-            }
-
-            .help-card li {
-                font-size: 0.9rem;
-                margin: 0.8rem 0;
-            }
-
-            .schedule-select{
-                font-size: 0.8rem;
-                padding: 0.3rem;
             }
 
             .btn {
@@ -513,10 +367,12 @@
     <div class="overlay" id="overlay"></div>
     
     <header class="header">
-        <button class="menu-button" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <h1>CSIATech</h1>
+        <h1>
+            <button class="menu-button" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            CSIATech
+        </h1>
         <div class="student-info">
             <i class="fas fa-user"></i>
             <span>{{student_id}}</span>
@@ -526,9 +382,9 @@
     <nav class="sidebar" id="sidebar">
         <h2>In School</h2>
         <ul>
-            <li><a class="nav-link" value = "yaja"><i class="fas fa-moon"></i>야자</a></li>
-            <li><a class="nav-link" value = "seminar"><i class="fas fa-users"></i>세미나실</a></li>
-            <li><a class="nav-link" value = "club"><i class="fas fa-laptop-code"></i>동아리</a></li>
+            <li><a class="nav-link" value="yaja"><i class="fas fa-moon"></i>야자</a></li>
+            <li><a class="nav-link" value="seminar"><i class="fas fa-users"></i>세미나실</a></li>
+            <li><a class="nav-link" value="club"><i class="fas fa-laptop-code"></i>동아리</a></li>
         </ul>
     </nav>
 
@@ -539,6 +395,7 @@
         </div>
 
         <div class="schedule-container">
+            <!-- 오늘의 야자 카드 -->
             <div class="schedule-card">
                 <div class="card-header">
                     <i class="fas fa-calendar-day"></i>
@@ -575,157 +432,163 @@
                 </div>
             </div>
 
+            <!-- 이번주 야자 카드 -->
             <div class="schedule-card">
                 <div class="card-header">
                     <i class="fas fa-calendar-week"></i>
                     이번주 야자
                 </div>
                 <div class="card-body">
-                    <table class="week-schedule">
-                        <thead>
-                            <tr>
-                                <th>교시</th>
-                                <th>월요일</th>
-                                <th>화요일</th>
-                                <th>수요일</th>
-                                <th>목요일</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1교시</td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period1-Monday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period1-Monday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period1-Tuesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period1-Tuesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period1-Wednesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period1-Wednesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period1-Thursday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period1-Thursday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2교시</td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period2-Monday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period2-Monday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period2-Tuesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period2-Tuesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period2-Wednesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period2-Wednesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period2-Thursday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period2-Thursday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3교시</td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period3-Monday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period3-Monday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period3-Tuesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period3-Tuesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period3-Wednesday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period3-Wednesday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                                <td>
-                                    <select class="schedule-select period-select" id="period3-Thursday">
-                                        <option value="야자">야자</option>
-                                        <option value="조퇴">조퇴</option>
-                                        <option value="외출/현체">외출/현체</option>
-                                        <option value="주문형강좌/방과후">주문형강좌/방과후</option>
-                                        <option value="기타">기타</option>
-                                    </select>
-                                    <input type="text" id="period3-Thursday-input" style="display: none;" class="form-control mt-2">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div style="overflow-x: auto;">
+                        <table class="week-schedule">
+                            <!-- 주간 스케줄 테이블 내용 -->
+                            <thead>
+                                <tr>
+                                    <th>교시</th>
+                                    <th>월요일</th>
+                                    <th>화요일</th>
+                                    <th>수요일</th>
+                                    <th>목요일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1교시</td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period1-Monday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period1-Monday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period1-Tuesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period1-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period1-Wednesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period1-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period1-Thursday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period1-Thursday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2교시</td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period2-Monday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period2-Monday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period2-Tuesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period2-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period2-Wednesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period2-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period2-Thursday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period2-Thursday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3교시</td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period3-Monday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period3-Monday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period3-Tuesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period3-Tuesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period3-Wednesday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period3-Wednesday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                    <td>
+                                        <select class="schedule-select period-select" id="period3-Thursday">
+                                            <option value="야자">야자</option>
+                                            <option value="조퇴">조퇴</option>
+                                            <option value="외출/현체">외출/현체</option>
+                                            <option value="주문형강좌/방과후">주문형강좌/방과후</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                        <input type="text" id="period3-Thursday-input" style="display: none;" class="form-control mt-2">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="button-group">
-                        <input type="submit" id = "yajasubmit" class="btn btn-primary" value="Submit" name="submit">
-                    </input>
+                        <button type="submit" id="yajasubmit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            저장하기
+                        </button>
                     </div>
                 </div>
             </div>
@@ -744,21 +607,9 @@
             </ul>
         </div>
     </main>
+
     <script src="../static/yaja.js"></script>
     <script>
-        const apiURL = "https://csiatech.kr/";
-        
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const value = link.getAttribute('value');
-                if (value) {
-                    window.location.href = apiURL + value;
-                }
-            });
-        });
-
-        // 모바일 메뉴 토글
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
@@ -773,15 +624,61 @@
             overlay.classList.remove('active');
         });
 
-        // 모바일 환경에서 테이블 스크롤을 부드럽게 처리
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target) && 
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+
+        const apiURL = "https://csiatech.kr/";
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const value = link.getAttribute('value');
+                if (value) {
+                    window.location.href = apiURL + value;
+                }
+            });
+        });
+
+        // Handle mobile table scrolling
         const tables = document.querySelectorAll('.week-schedule');
         tables.forEach(table => {
-            table.addEventListener('touchstart', function(e) {
-                this.style.cursor = 'grab';
+            let isScrolling = false;
+            let startX;
+            let scrollLeft;
+
+            table.addEventListener('touchstart', (e) => {
+                isScrolling = true;
+                const tableWrapper = table.parentElement;
+                startX = e.touches[0].pageX - tableWrapper.offsetLeft;
+                scrollLeft = tableWrapper.scrollLeft;
             });
 
-            table.addEventListener('touchend', function(e) {
-                this.style.cursor = 'default';
+            table.addEventListener('touchmove', (e) => {
+                if (!isScrolling) return;
+                e.preventDefault();
+                const tableWrapper = table.parentElement;
+                const x = e.touches[0].pageX - tableWrapper.offsetLeft;
+                const walk = (x - startX);
+                tableWrapper.scrollLeft = scrollLeft - walk;
+            });
+
+            table.addEventListener('touchend', () => {
+                isScrolling = false;
+            });
+        });
+
+        // Initialize select dropdowns with default values
+        document.addEventListener('DOMContentLoaded', () => {
+            const periodSelects = document.querySelectorAll('.period-select');
+            periodSelects.forEach(select => {
+                select.value = "야자"; // Set default value
             });
         });
     </script>

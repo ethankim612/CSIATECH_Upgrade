@@ -170,8 +170,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 document
   .getElementById("yajasubmit")
   .addEventListener("click", function (event) {
-    console.log("clickeeed the submit for today button");
-    event.preventDefault();
+    console.log("clicked the submit for today button");
     updateWeekSchedule();
   });
 
