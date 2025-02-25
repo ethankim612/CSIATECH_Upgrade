@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://csiatech.kr', 'https://www.csiatech.kr']
+CSRF_TRUSTED_ORIGINS = ['https://csiatech.kr']
 SECURE_SSL_REDIRECT = True
 
 # Application definition
