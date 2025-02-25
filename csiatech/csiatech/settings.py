@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "club",
     "seminar",
     "simple_history",
+    "csiatech",
 ]
 
 CELERY_BROKER_URL = "redis://localhost:6379"
