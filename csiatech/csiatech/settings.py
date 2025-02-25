@@ -30,8 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://csiatech.kr']
-
 # Application definition
 
 INSTALLED_APPS = [
