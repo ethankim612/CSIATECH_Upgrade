@@ -3,9 +3,9 @@ import os
 from celery import Celery
 from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CSIAOnline.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'csiatech.settings')
 
-app = Celery('CSIAOnline')
+app = Celery('csiatech')
 
 # Update the Celery configuration
 app.conf.update(
