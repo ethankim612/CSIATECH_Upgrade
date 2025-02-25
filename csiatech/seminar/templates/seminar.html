@@ -239,6 +239,33 @@
             font-size: 0.9rem;
         }
 
+        .notice-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .notice-title {
+            display: flex;
+            align-items: center;
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .notice-title i {
+            margin-right: 0.5rem;
+        }
+
+        .notice-content {
+            color: #856404;
+            font-size: 0.95rem;
+        }
+
         .overlay {
             display: none;
             position: fixed;
@@ -321,7 +348,7 @@
             <button class="menu-button" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            CSIATech
+            <a class="nav-link" value="home">CSIATech</a>
         </h1>
         <div class="student-info">
             <i class="fas fa-user"></i>
@@ -426,6 +453,18 @@
                         <div id="room-6-1" class="time-slot">1교시</div>
                         <div id="room-6-2" class="time-slot">2교시</div>
                         <div id="room-6-3" class="time-slot">3교시</div>
+                    </div>
+                </div>
+                
+                <!-- 공지사항 박스 추가 -->
+                <div class="notice-box">
+                    <div class="notice-title">
+                        <i class="fas fa-exclamation-circle"></i>
+                        세미나실 신청 공지사항
+                    </div>
+                    <div class="notice-content">
+                        <p>※ 세미나실 신청은 오후 1시까지만 가능합니다.</p>
+                        <p>※ 1시 이후에는 신청이 마감되오니 유의하시기 바랍니다.</p>
                     </div>
                 </div>
             </div>

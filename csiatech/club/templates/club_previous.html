@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CSIATech</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+
+        /* Base styles */
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #f8f9fc;
+            color: #5a5c69;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #2e59d9;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 23px;
+            color: #ffffff;
+            margin: 20px 0 20px 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #d1d3e2;
+            font-size: 20px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+
+        .sidebar .footer {
+            margin-top: auto;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #2e59d9;
+            color: #ffffff;
+            padding: 15px;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            box-sizing: none;
+        }
+
+        .navbar .nav-item {
+            margin-right: 20px;
+        }
+
+        .navbar .nav-link {
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: #4e73df;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 850px) {
+            .sidebar {
+                display: none; /* Hide sidebar on smaller screens */
+            }
+
+            .content-wrapper {
+                margin-left: 0; /* Adjust margin when sidebar is hidden */
+            }
+
+            .table-wrapper {
+                flex-direction: column; /* Stack tables vertically */
+            }
+
+            .table-container {
+                width: 100%; /* Make tables full width */
+                margin: 0; /* Remove margin between tables */
+            }
+        }
+        @media (min-width: 851px) {
+            .sidebar {
+                display: flex; /* Show sidebar on larger screens */
+            }
+
+            .content-wrapper {
+                margin-left: 220px; /* Restore margin when sidebar is visible */
+            }
+
+            .table-wrapper {
+                flex-direction: row; /* Align tables horizontally */
+            }
+
+            .table-container {
+                width: 45%; /* Adjust width for horizontal alignment */
+                margin: 10px; /* Add margin between tables */
+            }
+        }
+
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+        }
+
+        .dashboard-row {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .box {
+            background-color: #d1e7ff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .timetable table, .meal-info table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .timetable th, .timetable td, .meal-info th, .meal-info td {
+            border: 1px solid #a1c4fd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .academic-schedule {
+            position: relative;
+        }
+
+        .academic-schedule button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .academic-schedule button:hover {
+            background-color: #3a4c92;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e59d9;
+            margin-bottom: 10px;
+        }
+
+        .content-wrapper {
+            margin-top: 70px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .club-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .club-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .club-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .club-image {
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .club-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e59d9;
+            margin-bottom: 10px;
+        }
+
+        .club-description {
+            font-size: 16px;
+            color: #5a5c69;
+            margin-bottom: 10px;
+        }
+
+        .club-link {
+            color: #4e73df;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .club-link:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-nav {
+            display: flex; /* Use flexbox for horizontal alignment */
+            align-items: center; /* Center the items vertically */
+            justify-content: flex-end; /* Align the items to the right */
+        }
+
+        .navbar-nav .nav-item {
+            display: inline-flex; /* Display each nav item as inline-flex for proper alignment */
+            margin-left: 15px; /* Add spacing between the items */
+        }
+
+        @media (min-width: 850px) {
+            .navbar-nav .nav-item {
+                display: none; /* Hide all nav-items by default on larger screens */
+            }
+        }
+
+        /* Show specific nav-items on smaller screens */
+        @media (max-width: 849px) {
+            .navbar-nav .nav-item {
+                display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+                font-size: 18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>In School</h2>
+        <ul>
+            <li><a class="nav-link" value="yaja">야자</a></li>
+            <li><a class="nav-link" value="seminar">세미나실</a></li>
+            <li><a class="nav-link" value="club">동아리(개발중)</a></li>
+        </ul>
+        <div class="footer">
+            <ul>
+                <li><a class="nav-link" value="announce">공지</a></li>
+                <li><a class="nav-link" value="questions">문의</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End of Sidebar -->
+
+    <!-- Topbar -->
+    <nav class="navbar">
+        <ul class="navbar-brand nav-link" value="home">CSIATech</ul>
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                  <a class="nav-link" value = "home">
+                      <i class="fas fa-home"></i>
+                      <span>홈</span>
+                  </a>
+                  <a class="nav-link" value = "yaja">
+                      <span>야자</span>
+                  </a>
+                  <a class="nav-link" value = "seminar">
+                      <span>세미나실</span>
+                  </a>
+                  <a class="nav-link" value = "club">
+                      <span>동아리</span>
+                  </a>
+              </li>
+        </ul>
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <h1 class="text-primary mb-4">교내 동아리</h1>
+        <div class="club-container">
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club1.jpg');"></div>
+                <div class="club-title">오일러(12)</div>
+                <div class="club-description">수학동아리</div>
+                <a class="club-link">신동환, 이건(redsterx9@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club2.jpg');"></div>
+                <div class="club-title">스토아(6)</div>
+                <div class="club-description">철학을 기반으로 토론과 독서활동을 심도있게 진행하는 문학 동아리</div>
+                <a class="club-link">이도윤, 김채영(chy337337@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club3.jpg');"></div>
+                <div class="club-title">VERT (베르트)(23)</div>
+                <div class="club-description">정치외교토론동아리</div>
+                <a class="club-link">김주연, 김가엘(gaelgael2008@naver.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club4.jpg');"></div>
+                <div class="club-title">청소년 적십자(RCY)(22)</div>
+                <div class="club-description">안녕하세요! 청심국제중고등학교 청소년 적십자 동아리 CSIA RCY🇰🇷입니다. 이 동아리는 학생들이 서로 친해지고 협력하며, 다양한 봉사활동을 통해 같이 성장해나가는 의료봉사 동아리입니다. CSIA RCY는 다양한 활동을 통해 소중한 의료봉사 경험🌏과 현장지식을 얻을수있습니다. 저희는 적십자의 가치를 바탕으로 서로를 존중하고 사회에 봉사하는 활동을 지속적으로 진행하고 있습니다. 앞으로 매년 교내 헌혈행사를 연2회 진행할 예정입니다 우리 동아리는 더 나은 세상을 만들기 위해 열정적으로 노력하는 청소년들🙋🏻‍♀🙋🏻🙋🏼‍♂🙋🏽의 모임입니다. 함께하는 과정에서 우리는 친구들과의 소중한 추억을 만들며, 동시에 자신의 능력을 발전시킬 수 있습니다! 더군다나 적십자 활동은 생기부, EC로 넣기에 정말 좋은 봉사활동 중 하나가 될수있습니다.</div>
+                <a class="club-link">박진숙, 오예림(cellinaoh07ms3@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club5.jpg');"></div>
+                <div class="club-title">청소년경영전략학회(16)</div>
+                <div class="club-description">청소년 경영 학회 Case Works는 경영에 관심이 있는 청소년들이 함께 모여 실제 사례를 통해 경영 전략을 배우고 경험하는 동아리입니다. 올해는 다양한 경영 케이스 스터디를 통해 실무적인 문제 해결 능력을 키우고 있으며, 내년에는 카페 컨설팅 프로젝트를 진행할 예정입니다. 이 프로젝트에서는 실제 카페를 분석하고, 개선 방안을 제안해보며 경영 컨설팅의 기본을 체험하게 됩니다.</div>
+                <a class="club-link">서진형, 정찬호(a01034063917@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club6.jpg');"></div>
+                <div class="club-title">CSIAVANK | 반크(18)</div>
+                <div class="club-description">정치외교역사 동아리, 자타공인 교내 최고의 동아리, 2년 연속 최다 지원자 동아리</div>
+                <a class="club-link">이종경, 이재원(jake30097@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club7.jpg');"></div>
+                <div class="club-title">MOMENT (모먼트)(23)</div>
+                <div class="club-description">청심 유일무이 사진동아리</div>
+                <a class="club-link">이도윤, 채시원(csiwon0716@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club8.jpg');"></div>
+                <div class="club-title">또래상담(18)</div>
+                <div class="club-description">또래상담은 청심의 대표 중고연계동아리로, 또래친구들의 고민을 들어주고 학교폭력 및 자살예방 활동을 함으로써 청소년들 모두가 성장하는 것을 목표로 하는 동아리입니다.</div>
+                <a class="club-link">이수희, 이해인(godlsdl829@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club9.jpg');"></div>
+                <div class="club-title">영어번역동아리 ETOCS(20)</div>
+                <div class="club-description">안녕하세요. 저희는 청심국제고등학교 학생들로 이루어진 동아리 ETOCS(English Teaching of CheongShim) 입니다. 저희는 각자 다양한 배경에서 살아오며 양질의 교육을 받았고 다양한 역량을 키웠습니다. 그 중 저희 부원들이 가장 자신있어 하는건 영어실력입니다. 이렇게 키운 다양한 역량들과 지식들, 올바른 가치관 등을 한국 뿐 아닌 여러나라 아이들에게 전달 해 주고자 합니다.</div>
+                <a class="club-link">송은혜, 남궁지효(hiimjihyo0815@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club10.jpg');"></div>
+                <div class="club-title">잉글 ingle(13)</div>
+                <div class="club-description">국제교류부, 미디어부, 봉사부, 그리고 과학연합부로 이루어져있는 융합형 동아리입니다. 최근 8월, 제 1대 학술제를 연 바가 있습니다. @csia_ingle</div>
+                <a class="club-link">윤재성, 서라율(Rayulsuh@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club11.jpg');"></div>
+                <div class="club-title">생명과학실험동아리 CELLER(13)</div>
+                <div class="club-description">청심 대표⭐️ 생명과학 실험 동아리로서, 저희는 문헌 연구와 실험 설계, 실험실 안전수칙 포스터 및 MSDS 제작을 통해 실험의 기초를 다지고 있습니다.</div>
+                <a class="club-link">이근정, 정서현(edenchung41@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club12.jpg');"></div>
+                <div class="club-title">ShareMax(22)</div>
+                <div class="club-description">자신의 전공 분야에 따라 다양한 지식 나눔 영상을 제작하고 이를 유튜브에 올려 공유하는 동아리이며, 생기부, EC에 모두 잘 쓰일 수 있는 청심 최고의 동아리</div>
+                <a class="club-link">송은혜, 김세준(shareknowledgemax@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club13.jpg');"></div>
+                <div class="club-title">W.E.B. (World Economy Builders)(10)</div>
+                <div class="club-description">청심 최고의 경제 동아리 입니다. (더 자세한 설명이 필요할시 연락 주세요)</div>
+                <a class="club-link">김진환, 신희원(Snowflostee@gmail.com)</a>
+            </div>
+            <div class="club-card">
+                <div class="club-image" style="background-image: url('path/to/club14.jpg');"></div>
+                <div class="club-title">TEDxCSIA Youth(24)</div>
+                <div class="club-description">안녕하세요! TEDxCSIA Youth 운영진입니다. 다가오는 12월 23일, 청심국제중고등학교로 "Growth Mindset: Power of Perspective"를 주제로 한 TEDx 이벤트가 찾아옵니다. 인스타그램 계정 (@tedxcsiayouth)에 관련 정보를 포스팅하고 있으니 많은 관심 가져 주시면 감사하겠습니다. 추후 연사분들에 대한 소개, 운영진 인터뷰 등 컨텐츠가 업로드될 예정입니다!</div>
+                <a class="club-link">이순진, 김민준(csiamjk@gmail.com)</a>
+            </div>
+        </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+</body>
+
+</html>
