@@ -65,7 +65,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BEAT_SCHEDULE = {
     "run-reset-every-friday": {
         "task": "yaja.tasks.run_reset_script",
-        "schedule": crontab(hour=6, minute=59, day_of_week="sat"),
+        "schedule": crontab(hour=18, minute=20, day_of_week="tue"),
     },
     "run-reset-every-day-9am": {
         "task": "yaja.tasks.run_update_script",
