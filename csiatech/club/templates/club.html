@@ -33,6 +33,8 @@
             min-height: 100vh;
             width: 100%;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
@@ -61,6 +63,14 @@
 
         .menu-button {
             display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
         }
 
         .student-info {
@@ -79,22 +89,26 @@
             opacity: 0.9;
         }
 
+        /* 사이드바 스타일 수정 */
+        .page-wrapper {
+            display: flex;
+            min-height: calc(100vh - 60px);
+            margin-top: 60px;
+        }
+
         .sidebar {
-            position: fixed;
-            top: 60px;
-            left: -260px;
-            width: 260px;
-            height: calc(100vh - 60px);
+            width: 220px;
+            min-width: 220px;
             background: var(--primary-dark);
             color: white;
             padding: 1.5rem;
-            transition: left 0.3s ease;
-            z-index: 99;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: calc(100vh - 60px);
+            top: 60px;
             overflow-y: auto;
-        }
-
-        .sidebar.active {
-            left: 0;
+            z-index: 90;
+            transition: transform 0.3s ease;
         }
 
         .sidebar h2 {
@@ -130,8 +144,10 @@
         }
 
         .main-container {
-            padding: 80px 1rem 1rem 1rem;
-            min-height: 100vh;
+            flex-grow: 1;
+            margin-left: 220px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
             background: var(--light);
         }
 
@@ -146,31 +162,6 @@
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1rem;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            width: 100%;
         }
 
         .filters {
@@ -191,6 +182,16 @@
         .cards-container {
             display: grid;
             gap: 1rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--secondary);
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: auto;
         }
 
         .club-card {
@@ -242,31 +243,6 @@
             gap: 0.5rem;
         }
 
-        .club-actions {
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .action-btn {
-            padding: 0.5rem;
-            border-radius: 5px;
-            border: 1px solid var(--primary);
-            background: white;
-            color: var(--primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-        }
-
-        .action-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
         .overlay {
             display: none;
             position: fixed;
@@ -275,81 +251,48 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 98;
+            z-index: 89;
         }
 
         .overlay.active {
             display: block;
         }
 
-        /* Tablet and larger screens */
-        @media (min-width: 768px) {
+        /* Responsive Styles */
+        @media (max-width: 768px) {
             .menu-button {
-                display: none;
+                display: block;
             }
 
             .sidebar {
-                left: 0;
-                width: 220px;
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 95;
+                width: 260px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
             }
 
             .main-container {
-                margin-left: 220px;
-                padding: 80px 2rem 2rem 2rem;
+                margin-left: 0;
+                width: 100%;
             }
 
-            .page-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 2rem;
+            .cards-container {
+                grid-template-columns: 1fr;
             }
+        }
 
-            .btn-primary {
-                width: auto;
-            }
-
-            .filters {
-                grid-template-columns: repeat(2, 1fr);
+        @media (min-width: 768px) {
+            .sidebar {
+                left: 0;
             }
 
             .cards-container {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
                 gap: 1.5rem;
-            }
-
-            .club-actions {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* Small screens */
-        @media (max-width: 767px) {
-            .header h1 {
-                font-size: 1.2rem;
-            }
-
-            .student-info {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .club-image {
-                height: 100px;
-            }
-
-            .club-title {
-                font-size: 1.1rem;
-            }
-            .menu-button{
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                padding: 8px;
-                display: flex;
-                align-items: center;
             }
         }
     </style>
@@ -370,249 +313,255 @@
         </div>
     </header>
 
-    <nav class="sidebar" id="sidebar">
-        <h2>In School</h2>
-        <ul>
-            <li><a class="nav-link" value="yaja"><i class="fas fa-moon"></i>야자</a></li>
-            <li><a class="nav-link" value="seminar"><i class="fas fa-users"></i>세미나실</a></li>
-            <li><a class="nav-link" value="club"><i class="fas fa-laptop-code"></i>동아리</a></li>
-        </ul>
-    </nav>
+    <div class="page-wrapper">
+        <nav class="sidebar" id="sidebar">
+            <h2>In School</h2>
+            <ul>
+                <li><a class="nav-link" value="yaja"><i class="fas fa-moon"></i>야자</a></li>
+                <li><a class="nav-link" value="seminar"><i class="fas fa-users"></i>세미나실</a></li>
+                <li><a class="nav-link" value="club"><i class="fas fa-laptop-code"></i>동아리</a></li>
+            </ul>
+        </nav>
 
-    <main class="main-container">
-        <div class="page-header">
-            <h2 class="page-title">
-                <i class="fas fa-laptop-code"></i>
-                동아리 관리
-            </h2>
-        </div>
-
-        <div class="filters">
-            <select class="filter-select" id="field-filter">
-                <option value="">전체 분야</option>
-                <option value="math">수학</option>
-                <option value="literature">문학/철학</option>
-                <option value="science">과학</option>
-                <option value="diplomacy">정치외교</option>
-                <option value="volunteer">봉사</option>
-                <option value="business">경영/경제</option>
-                <option value="media">미디어/사진</option>
-                <option value="language">언어/번역</option>
-                <option value="education">교육</option>
-            </select>
-        </div>
-
-        <div class="cards-container">
-            <!-- 수학 동아리 -->
-            <div class="club-card" data-field="math">
-                <div class="club-image">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">오일러</h3>
-                    </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 신동환, 이건</p>
-                        <p>수학동아리</p>
-                    </div>
-                </div>
+        <main class="main-container">
+            <div class="page-header">
+                <h2 class="page-title">
+                    <i class="fas fa-laptop-code"></i>
+                    동아리 관리
+                </h2>
             </div>
 
-            <!-- 철학 동아리 -->
-            <div class="club-card" data-field="literature">
-                <div class="club-image">
-                    <i class="fas fa-book"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">스토아</h3>
-                    </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 이도윤, 김채영</p>
-                        <p>철학을 기반으로 토론과 독서활동을 심도있게 진행하는 문학 동아리</p>
-                    </div>
-                </div>
+            <div class="filters">
+                <select class="filter-select" id="field-filter">
+                    <option value="">전체 분야</option>
+                    <option value="math">수학</option>
+                    <option value="literature">문학/철학</option>
+                    <option value="science">과학</option>
+                    <option value="diplomacy">정치외교</option>
+                    <option value="volunteer">봉사</option>
+                    <option value="business">경영/경제</option>
+                    <option value="media">미디어/사진</option>
+                    <option value="language">언어/번역</option>
+                    <option value="education">교육</option>
+                </select>
             </div>
 
-            <!-- 정치외교 동아리 -->
-            <div class="club-card" data-field="diplomacy">
-                <div class="club-image">
-                    <img src="{% static 'images/VERT.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">VERT (베르트)</h3>
+            <div class="cards-container">
+                <!-- 수학 동아리 -->
+                <div class="club-card" data-field="math">
+                    <div class="club-image">
+                        <i class="fas fa-calculator"></i>
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 김주연, 김가엘</p>
-                        <p>정치외교토론동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">오일러</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 신동환, 이건</p>
+                            <p>수학동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 봉사 동아리 -->
-            <div class="club-card" data-field="volunteer">
-                <div class="club-image">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <img src="{% static 'images/RCY.jpg' %}" alt="VERT">
+                <!-- 철학 동아리 -->
+                <div class="club-card" data-field="literature">
+                    <div class="club-image">
+                        <i class="fas fa-book"></i>
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 박진숙, 오예림</p>
-                        <p>다양한 봉사활동을 통해 같이 성장해나가는 의료봉사 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">스토아</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 이도윤, 김채영</p>
+                            <p>철학을 기반으로 토론과 독서활동을 심도있게 진행하는 문학 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 경영 동아리 -->
-            <div class="club-card" data-field="business">
-                <div class="club-image">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">청소년경영전략학회</h3>
+                <!-- 정치외교 동아리 -->
+                <div class="club-card" data-field="diplomacy">
+                    <div class="club-image">
+                        <img src="{% static 'images/VERT.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 서진형, 정찬호</p>
-                        <p>경영 케이스 스터디를 통해 실무적인 문제 해결 능력을 키우는 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">VERT (베르트)</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 김주연, 김가엘</p>
+                            <p>정치외교토론동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 역사 동아리 -->
-            <div class="club-card" data-field="diplomacy">
-                <div class="club-image">
-                    <img src="{% static 'images/VANK.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">CSIAVANK | 반크</h3>
+                <!-- 봉사 동아리 -->
+                <div class="club-card" data-field="volunteer">
+                    <div class="club-image">
+                        <i class="fas fa-hands-helping"></i>
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 이종경, 이재원</p>
-                        <p>정치외교역사 동아리, 자타공인 교내 최고의 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <img src="{% static 'images/RCY.jpg' %}" alt="VERT">
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 박진숙, 오예림</p>
+                            <p>다양한 봉사활동을 통해 같이 성장해나가는 의료봉사 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 사진 동아리 -->
-            <div class="club-card" data-field="media">
-                <div class="club-image">
-                    <img src="{% static 'images/Moment.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">MOMENT (모먼트)</h3>
+                <!-- 경영 동아리 -->
+                <div class="club-card" data-field="business">
+                    <div class="club-image">
+                        <i class="fas fa-briefcase"></i>
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 이도윤, 채시원</p>
-                        <p>청심 유일무이 사진동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">청소년경영전략학회</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 서진형, 정찬호</p>
+                            <p>경영 케이스 스터디를 통해 실무적인 문제 해결 능력을 키우는 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 상담 동아리 -->
-            <div class="club-card" data-field="volunteer">
-                <div class="club-image">
-                    <img src="{% static 'images/PeerCounsel.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">또래상담</h3>
+                <!-- 역사 동아리 -->
+                <div class="club-card" data-field="diplomacy">
+                    <div class="club-image">
+                        <img src="{% static 'images/VANK.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 이수희, 이해인</p>
-                        <p>또래친구들의 고민을 들어주고 학교폭력 및 자살예방 활동을 함</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">CSIAVANK | 반크</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 이종경, 이재원</p>
+                            <p>정치외교역사 동아리, 자타공인 교내 최고의 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 영어 동아리 -->
-            <div class="club-card" data-field="language">
-                <div class="club-image">
-                    <img src="{% static 'images/ETOCS.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">영어번역동아리 ETOCS</h3>
+                <!-- 사진 동아리 -->
+                <div class="club-card" data-field="media">
+                    <div class="club-image">
+                        <img src="{% static 'images/Moment.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 송은혜, 남궁지효</p>
-                        <p>영어 번역 및 교육 관련 활동을 하는 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">MOMENT (모먼트)</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 이도윤, 채시원</p>
+                            <p>청심 유일무이 사진동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 융합 동아리 -->
-            <div class="club-card" data-field="education">
-                <div class="club-image">
-                    <img src="{% static 'images/Ingle.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">잉글 ingle</h3>
+                <!-- 상담 동아리 -->
+                <div class="club-card" data-field="volunteer">
+                    <div class="club-image">
+                        <img src="{% static 'images/PeerCounsel.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 윤재성, 서라율</p>
-                        <p>국제교류부, 미디어부, 봉사부, 과학연합부로 이루어진 융합형 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">또래상담</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 이수희, 이해인</p>
+                            <p>또래친구들의 고민을 들어주고 학교폭력 및 자살예방 활동을 함</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 과학 동아리 -->
-            <div class="club-card" data-field="science">
-                <div class="club-image">
-                    <i class="fas fa-flask"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">생명과학실험동아리 CELLER</h3>
+                <!-- 영어 동아리 -->
+                <div class="club-card" data-field="language">
+                    <div class="club-image">
+                        <img src="{% static 'images/ETOCS.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 이근정, 정서현</p>
-                        <p>청심 대표 생명과학 실험 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">영어번역동아리 ETOCS</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 송은혜, 남궁지효</p>
+                            <p>영어 번역 및 교육 관련 활동을 하는 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 지식공유 동아리 -->
-            <div class="club-card" data-field="education">
-                <div class="club-image">
-                    <i class="fas fa-share-alt"></i>
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">ShareMax</h3>
+                <!-- 융합 동아리 -->
+                <div class="club-card" data-field="education">
+                    <div class="club-image">
+                        <img src="{% static 'images/Ingle.jpg' %}" alt="VERT">
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 송은혜, 김세준</p>
-                        <p>자신의 전공 분야에 따라 다양한 지식 나눔 영상을 제작하고 공유</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">잉글 ingle</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 윤재성, 서라율</p>
+                            <p>국제교류부, 미디어부, 봉사부, 과학연합부로 이루어진 융합형 동아리</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 경제 동아리 -->
-            <div class="club-card" data-field="business">
-                <div class="club-image">
-                    <img src="{% static 'images/WEB.jpg' %}" alt="VERT">
-                </div>
-                <div class="club-content">
-                    <div class="club-header">
-                        <h3 class="club-title">W.E.B. (World Economy Builders)</h3>
+                <!-- 과학 동아리 -->
+                <div class="club-card" data-field="science">
+                    <div class="club-image">
+                        <i class="fas fa-flask"></i>
                     </div>
-                    <div class="club-details">
-                        <p><i class="fas fa-user-tie"></i>담당: 김진환, 신희원</p>
-                        <p>청심 최고의 경제 동아리</p>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">생명과학실험동아리 CELLER</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 이근정, 정서현</p>
+                            <p>청심 대표 생명과학 실험 동아리</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 지식공유 동아리 -->
+                <div class="club-card" data-field="education">
+                    <div class="club-image">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">ShareMax</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 송은혜, 김세준</p>
+                            <p>자신의 전공 분야에 따라 다양한 지식 나눔 영상을 제작하고 공유</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 경제 동아리 -->
+                <div class="club-card" data-field="business">
+                    <div class="club-image">
+                        <img src="{% static 'images/WEB.jpg' %}" alt="VERT">
+                    </div>
+                    <div class="club-content">
+                        <div class="club-header">
+                            <h3 class="club-title">W.E.B. (World Economy Builders)</h3>
+                        </div>
+                        <div class="club-details">
+                            <p><i class="fas fa-user-tie"></i>담당: 김진환, 신희원</p>
+                            <p>청심 최고의 경제 동아리</p>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <p>Copyright © CSIATech 2025</p>
+                </footer>
+        
             </div>
-            
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         const menuToggle = document.getElementById('menuToggle');
