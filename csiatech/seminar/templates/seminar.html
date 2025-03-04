@@ -61,6 +61,12 @@
             gap: 1rem;
         }
 
+        .header-logo {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
         .student-info {
             display: flex;
             align-items: center;
@@ -93,7 +99,7 @@
             margin-top: 60px;
         }
 
-        /* 사이드바 스타일 수정 */
+        /* 사이드바 스타일 */
         .sidebar {
             width: 220px;
             min-width: 220px;
@@ -375,7 +381,7 @@
             <button class="menu-button" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="https://csiatech.kr/home" class="nav-link">CSIATech</a>
+            <a href="https://csiatech.kr/home" class="header-logo">CSIATech</a>
         </h1>
         <div class="student-info">
             <i class="fas fa-user"></i>
@@ -387,9 +393,9 @@
         <nav class="sidebar" id="sidebar">
             <h2>In School</h2>
             <ul>
-                <li><a href="https://csiatech.kr/yaja" class="nav-link"><i class="fas fa-moon"></i>야자</a></li>
-                <li><a href="https://csiatech.kr/seminar" class="nav-link"><i class="fas fa-users"></i>세미나실</a></li>
-                <li><a href="https://csiatech.kr/club" class="nav-link"><i class="fas fa-laptop-code"></i>동아리</a></li>
+                <li><a href="https://csiatech.kr/yaja"><i class="fas fa-moon"></i>야자</a></li>
+                <li><a href="https://csiatech.kr/seminar"><i class="fas fa-users"></i>세미나실</a></li>
+                <li><a href="https://csiatech.kr/club"><i class="fas fa-laptop-code"></i>동아리</a></li>
             </ul>
             <ul style="margin-top: 2rem;">
             </ul>
@@ -512,37 +518,43 @@
     <script src="../static/seminar.js"></script>
 
     <script>
+        // 사이드바 토글 기능
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
 
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
+        if (menuToggle && sidebar && overlay) {
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
 
         // 화면 크기가 바뀔 때 사이드바 상태 조정
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && sidebar && overlay) {
                 sidebar.classList.remove('active');
                 overlay.classList.remove('active');
             }
         });
-        
-        // 사이드바의 링크 클릭 시 모바일에서 사이드바 닫기
-        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-                }
+
+        // 모바일에서 사이드바 메뉴 클릭 시 사이드바 닫기
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        if (sidebarLinks.length > 0) {
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768 && sidebar && overlay) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                    }
+                });
             });
-        });
+        }
     </script>
 </body>
 </html>
