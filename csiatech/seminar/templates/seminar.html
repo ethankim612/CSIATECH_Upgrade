@@ -87,7 +87,6 @@
             padding: 8px;
         }
 
-        /* 페이지 래퍼 추가 */
         .page-wrapper {
             display: flex;
             min-height: calc(100vh - 60px);
@@ -525,14 +524,15 @@
             }
         });
 
-        const apiURL = "https://csiatech.kr/";
-        
+        // 기존 apiURL 변수가 이미 선언되어 있으므로 window 객체에 할당하여 중복 선언 방지
+        window.apiURL = window.apiURL || "https://csiatech.kr/";
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
-                const value = link.getAttribute('value');
+                const value = this.getAttribute('value');
                 if (value) {
-                    window.location.href = apiURL + value;
+                    window.location.href = window.apiURL + value;
                 }
             });
         });
