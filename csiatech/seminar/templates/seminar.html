@@ -375,7 +375,7 @@
             <button class="menu-button" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <a class="nav-link" value="home">CSIATech</a>
+            <a href="https://csiatech.kr/home" class="nav-link">CSIATech</a>
         </h1>
         <div class="student-info">
             <i class="fas fa-user"></i>
@@ -387,9 +387,9 @@
         <nav class="sidebar" id="sidebar">
             <h2>In School</h2>
             <ul>
-                <li><a class="nav-link" value="yaja"><i class="fas fa-moon"></i>야자</a></li>
-                <li><a class="nav-link" value="seminar"><i class="fas fa-users"></i>세미나실</a></li>
-                <li><a class="nav-link" value="club"><i class="fas fa-laptop-code"></i>동아리</a></li>
+                <li><a href="https://csiatech.kr/yaja" class="nav-link"><i class="fas fa-moon"></i>야자</a></li>
+                <li><a href="https://csiatech.kr/seminar" class="nav-link"><i class="fas fa-users"></i>세미나실</a></li>
+                <li><a href="https://csiatech.kr/club" class="nav-link"><i class="fas fa-laptop-code"></i>동아리</a></li>
             </ul>
             <ul style="margin-top: 2rem;">
             </ul>
@@ -533,15 +533,13 @@
                 overlay.classList.remove('active');
             }
         });
-
-        const apiURL = "https://csiatech.kr/";
         
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const value = link.getAttribute('value');
-                if (value) {
-                    window.location.href = apiURL + value;
+        // 사이드바의 링크 클릭 시 모바일에서 사이드바 닫기
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
                 }
             });
         });
