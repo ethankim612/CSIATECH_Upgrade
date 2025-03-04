@@ -294,10 +294,10 @@
             border-radius: 8px;
             box-shadow: var(--shadow);
             margin-top: 20px;
-            width: calc(100% - 40px);
+            width: 100%;
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            max-width: 1200px;
         }
 
         .overlay {
@@ -535,15 +535,12 @@
         });
 
         const apiURL = "https://csiatech.kr/";
-
-        // apiURL 변수는 seminar.js 파일에서 이미 선언되어 있으므로 여기서는 선언하지 않음
-        // 네비게이션 링크 설정
+        
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
-                const value = this.getAttribute('value');
+                const value = link.getAttribute('value');
                 if (value) {
-                    // 기존에 선언된 apiURL 변수 사용
                     window.location.href = apiURL + value;
                 }
             });
