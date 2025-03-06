@@ -63,6 +63,11 @@ def seminar_room_view(request):
             & Q(period3=reservation_data.get("period3"))
         ).delete()
 
+        #debug console
+        print(current_student_id)
+        print("deleted reservation w/ detail:")
+        print(student_ids)
+
         # Update room status
         update_room_status()
 
@@ -154,6 +159,11 @@ def seminar_room_view(request):
             period3=period3,
             room_number=room_number,
         )
+
+        #debug console
+        print(current_student_id)
+        print("created reservation w/ detail:")
+        print(student_ids)
 
         # Update room status
         update_room_status()
