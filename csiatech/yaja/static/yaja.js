@@ -6,6 +6,8 @@ function getSelectedValue(dropdownId) {
   if (selectedValue === "기타") {
     let inputField = document.getElementById(`${dropdownId}-input`);
     return inputField.value;
+  } else if (selectedValue === "신청미반영") {
+    return "신청미반영";
   } else {
     return selectedValue;
   }
@@ -67,6 +69,28 @@ function updateWeekSchedule() {
     });
 }
 
+function setDefaultValues() {
+  const periods = ["period1", "period2", "period3"];
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+
+  days.forEach((day) => {
+    periods.forEach((period) => {
+      const selectId = `${period}-${day}`;
+      const selectElement = document.getElementById(selectId);
+      if (selectElement) {
+        selectElement.value = "신청미반영";
+
+        // Hide the custom input field
+        const inputId = `${selectId}-input`;
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+          inputElement.style.display = "none";
+        }
+      }
+    });
+  });
+}
+
 function retrieveCurrentSchedule() {
   console.log("Sending GET request to:", apiURL + "yaja/");
 
@@ -107,7 +131,15 @@ function updateUIWithSchedule(data) {
       const inputElement = document.getElementById(inputId);
       const value = data[day][period];
 
-      if (["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(value)) {
+      if (
+        [
+          "외출/현체",
+          "조퇴",
+          "야자",
+          "주문형강좌/방과후",
+          "신청미반영영",
+        ].includes(value)
+      ) {
         selectElement.value = value;
         inputElement.style.display = "none"; // Hide input field
       } else {
@@ -164,6 +196,7 @@ document.querySelectorAll(".period-select").forEach((select) => {
 
 // Call this function when the page loads
 document.addEventListener("DOMContentLoaded", (event) => {
+  setDefaultValues(); // Set all select elements to "신청미반영" first
   retrieveCurrentSchedule();
 });
 
