@@ -34,7 +34,7 @@ class Command(BaseCommand):
         )
 
         # Send data to Google Sheets API endpoint
-        GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgcGleKi_yqXuzFwFXPJTMRf1Dfe0F-hcDUrirmgdQuIYITYTq297KsRmB1PxzBuXj/exec"
+        GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw__AYv7OsEhfEqdHsUEzijh7bx_dqxg74a9E3LPD5Hs5vLrhe2o5IxynAtIN-CltU/exec"
 
         try:
             response = requests.post(
